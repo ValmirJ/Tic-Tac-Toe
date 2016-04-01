@@ -5,6 +5,12 @@ public class Tabuleiro
 
     public boolean haMarcaNaPosicao (int lin, int col) throws Exception
     {
+        if(lin < 0 || lin >= matriz.length)
+            throw new Exception("Linha inválida, excede as rows da matriz");
+        if(col < 0 || col >= matriz[0].length)
+            throw new Exception("Coluna inválida, excede as colunas da matriz");
+        
+        
         // verifica se ha marca na posicao indicada por seus parametros, retornando
         // true em caso afirmativo, ou false em caso negativo; lanca excecao se seus
         // parametros forem invalidos

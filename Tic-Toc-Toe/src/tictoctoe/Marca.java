@@ -5,17 +5,31 @@ public class Marca
 
     public Marca (char smb) throws Exception
     {
+        smb = Character.toUpperCase(smb);
+        if(smb != 'X' || smb != 'O')
+            throw new Exception("Marca inválida");
+        
+        this.simbolo = smb;
         // verifica se smb � um simbolo valido (X ou O), iniciando simbolo com smb
         // em caso afirmativo, ou lancando excecao, caso contrario
     }
 
     public char getSimbolo ()
     {
-        // retorna o simbolo associado a marca (X ou O)
+        return this.simbolo;
     }
 
     public boolean equals (Object obj)
     {
+        if(obj == this)
+            return true;
+        if(obj == null)
+            return false;
+        if(!(obj instanceof Marca))
+            return false;
+        
+        Marca outro = (Marca)obj;
+            
         // verifica se this e obj possuem o mesmo conteudo, retornando true
         // se sim ou false se nao
     }
