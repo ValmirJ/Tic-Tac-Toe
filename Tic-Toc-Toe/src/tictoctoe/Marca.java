@@ -19,6 +19,7 @@ public class Marca
         return this.simbolo;
     }
 
+    @Override
     public boolean equals (Object obj)
     {
         if(obj == this)
@@ -29,28 +30,29 @@ public class Marca
             return false;
         
         Marca outro = (Marca)obj;
-            
+        
+        if(this.simbolo != outro.simbolo)
+            return false;
+        
+        return true;
         // verifica se this e obj possuem o mesmo conteudo, retornando true
         // se sim ou false se nao
     }
-
+    
+    @Override
     public String toString ()
     {
+        return "Simbolo: " + simbolo;
         // retorna um String que representa o conteudo do chamante do metodo
     }
 
+    @Override
     public int hashCode ()
     {
+        int resul = super.hashCode();
+        
+        resul = resul * 7 + new Character(this.simbolo).hashCode();
+        return resul;
         // retorna o codigo de espalhamento do chamante do metodo
-    }
-
-    public Marca (Marca m) throws Exception
-    {
-        // construtor de copia
-    }
-
-    public Object clone ()
-    {
-        // retorna uma exata copia do this
     }
 }
