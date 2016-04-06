@@ -11,22 +11,59 @@ public class JogadorHumano implements Cloneable
 
     public JogadorHumano (Tabuleiro tab) throws Exception
     {
+        if (tab == null)
+            throw new Exception("Tabuleiro nulo");
+        
+        tabDoJogo = new Tabuleiro(tab);
+        
+        System.out.print("Digite sua marca: ");
+        for(;;) {
+            try {
+                marca = new Marca((char)entrada.read());
+                break;
+            }
+            catch(Exception e) {
+                System.err.print(e + ". Tente novamente!");
+            }
+        }
         // inicia tabDoJogo com tab e pergunta ao jogador qual marca (X ou O) deseja usar,
         // iniciando marca; lanca excecao caso o tab seja nulo
     }
 
     public JogadorHumano (Tabuleiro tab, Marca mrc) throws Exception
     {
+        if(tab == null)
+            throw new Exception("Tabuleiro nulo");
+        if(mrc == null)
+            throw new Exception("Marca nula");
+        
+        tabDoJogo = new Tabuleiro(tab);
+        marca = new Marca(mrc.getSimbolo());
         // inicia tabDoJogo com tab e marca com mrc; lanca excecao caso tab ou mrc sejam nulos
     }
 
     public Marca getMarca ()
     {
+        return this.marca;
         // retorna a marca do jogador
     }
 
     public void facaSuaJogada ()
-    {
+    {   
+        int lin, col;
+        for(;;) {
+            try {
+                System.out.print("\nDigite uma posição X: ");
+                lin = (int)entrada.read();
+                System.out.print("\nDigite uma posição Y: ");
+                col = (int)entrada.read();
+                tabDoJogo.setMarcaNaPosicao(marca, lin, col);
+                break;
+            }
+            catch(Exception e) {
+                System.err.print("\nPosição inválida, tente novamente");
+            }
+        }
         // pergunta, quantas vezes forem necessarias, onde o jogador quer jogar
         // (ate que o mesmo indique uma jogada valida), que sera a jogada do jogador
     }

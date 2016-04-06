@@ -1,7 +1,7 @@
 package tictoctoe;
-public class Tabuleiro
+public class Tabuleiro implements Cloneable
 {
-    protected Marca[][] matriz = new Marca [3][3];
+    protected Marca[][] matriz; 
 
     public boolean haMarcaNaPosicao (int lin, int col) throws Exception
     {
@@ -17,6 +17,9 @@ public class Tabuleiro
         // verifica se ha marca na posicao indicada por seus parametros, retornando
         // true em caso afirmativo, ou false em caso negativo; lanca excecao se seus
         // parametros forem invalidos
+    }
+    public Tabuleiro() {
+        matriz = new Marca [3][3];
     }
 
     public Marca getMarcaNaPosicao (int lin, int col) throws Exception

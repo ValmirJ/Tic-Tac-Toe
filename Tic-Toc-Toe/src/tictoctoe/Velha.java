@@ -18,7 +18,7 @@ public class Velha
         {
             try
             {
-                tabDoJogo = new Tabuleiro ();
+                tabDoJogo = new Tabuleiro();
 
                 if (jogadorHumanoComeca)
                 {
