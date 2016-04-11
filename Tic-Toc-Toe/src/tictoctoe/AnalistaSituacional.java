@@ -17,16 +17,25 @@ public class AnalistaSituacional implements Cloneable
         if(!fimDeJogo())
             throw new Exception("Jogo ainda não acabou");
         for(int i = 0; i < this.tabDoJogo.matriz.length; i++) {
-            for(int j = 0; j <this.tabDoJogo.matriz[0].length; j++) {
-                
+            if(verificaSeHaVencedor(this.tabDoJogo.matriz[i][0], this.tabDoJogo.matriz[i][1], this.tabDoJogo.matriz[i][2])) {
+                return this.tabDoJogo.matriz[i][0];
+            }
+            if(verificaSeHaVencedor(this.tabDoJogo.matriz[0][i], this.tabDoJogo.matriz[1][i], this.tabDoJogo.matriz[2][i])) {
+                return this.tabDoJogo.matriz[0][i];
             }
         }
+        if(verificaSeHaVencedor(this.tabDoJogo.matriz[0][2], this.tabDoJogo.matriz[1][1], this.tabDoJogo.matriz[2][0]))
+            return this.tabDoJogo.matriz[0][2];
+        if(verificaSeHaVencedor(this.tabDoJogo.matriz[0][0], this.tabDoJogo.matriz[1][1], this.tabDoJogo.matriz[2][2]))
+            return this.tabDoJogo.matriz[0][0];
+        
+        return null;
     }
 
     protected boolean tabuleiroCheio ()
     {
-        for(int i = 0; i < tabDoJogo.matriz.length; i++)
-            for(int j = 0; j < tabDoJogo.matriz[0].length; i++)
+        for(int i = 0; i < this.tabDoJogo.matriz.length; i++)
+            for(int j = 0; j < this.tabDoJogo.matriz[0].length; j++)
             {
                 try
                 {
@@ -42,12 +51,28 @@ public class AnalistaSituacional implements Cloneable
         // verifica se o tabuleiro esta totalmente preenchido com marcas
     }
 
+    protected boolean verificaSeHaVencedor(Marca a1, Marca a2, Marca a3) {
+        return (a1.equals(a2) && a2.equals(a3)) && a1 != null;
+    }
     public boolean fimDeJogo ()
     {
         if(tabuleiroCheio())
             return true;
-        return false;
+        
+        for(int i = 0; i < this.tabDoJogo.matriz.length; i++) {
+            if(verificaSeHaVencedor(this.tabDoJogo.matriz[i][0], this.tabDoJogo.matriz[i][1], this.tabDoJogo.matriz[i][2])) {
+                return true;
+            }
+            if(verificaSeHaVencedor(this.tabDoJogo.matriz[0][i], this.tabDoJogo.matriz[1][i], this.tabDoJogo.matriz[2][i])) {
+                return true;
+            }
+        }
+        if(verificaSeHaVencedor(this.tabDoJogo.matriz[0][2], this.tabDoJogo.matriz[1][1], this.tabDoJogo.matriz[2][0]))
+            return true;
+        if(verificaSeHaVencedor(this.tabDoJogo.matriz[0][0], this.tabDoJogo.matriz[1][1], this.tabDoJogo.matriz[2][2]))
+            return true;
         // verifica se o jogo acabou, retornando true se sim ou false se nao
+        return false;
     }
 
     @Override
@@ -63,7 +88,7 @@ public class AnalistaSituacional implements Cloneable
         AnalistaSituacional outro = (AnalistaSituacional)obj;
         
         for(int i = 0; i < this.tabDoJogo.matriz.length; i++)
-            for(int j = 0; j <this.tabDoJogo.matriz[0].length; j++)
+            for(int j = 0; j < this.tabDoJogo.matriz[0].length; j++)
                 if(!this.tabDoJogo.matriz[i][j].equals(outro.tabDoJogo.matriz[i][j]))
                     return false;
         
@@ -75,23 +100,17 @@ public class AnalistaSituacional implements Cloneable
     @Override
     public String toString ()
     {
-        String str = "";
-        for(int i=0; i < this.tabDoJogo.matriz.length; i++) {
-            str += i + " | " ;
-            for(int j = 0; j < this.tabDoJogo.matriz[0].length; i++) {
-                str += "_\n" + this.tabDoJogo.matriz[i][j].getSimbolo();
-            }
-        }
         
-        return str;
+        return this.tabDoJogo.toString();
         // retorna um String que representa o conteudo do chamante do metodo
     }
 
+    @Override
     public int hashCode ()
     {
         int resul = super.hashCode();
         for(int i=0; i < this.tabDoJogo.matriz.length; i++)
-            for(int j = 0; j < this.tabDoJogo.matriz[0].length; i++)
+            for(int j = 0; j < this.tabDoJogo.matriz[0].length; j++)
                 resul = resul * 7 + this.tabDoJogo.matriz[i][j].hashCode();
         
         return resul;

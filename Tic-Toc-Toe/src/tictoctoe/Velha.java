@@ -20,6 +20,7 @@ public class Velha
             {
                 tabDoJogo = new Tabuleiro();
 
+
                 if (jogadorHumanoComeca)
                 {
                     jogadorH = new JogadorHumano (tabDoJogo);
@@ -61,8 +62,10 @@ public class Velha
                 jogadorHumanoComeca = !jogadorHumanoComeca;
             }
             catch (Exception e)
-            {}
+            {
+               System.err.print(e);
+            }
         }
-        while (jogadorH.querMaisUmaPartida());
+        while (jogadorH.querMaisUmaPartida()); 
     }
 }

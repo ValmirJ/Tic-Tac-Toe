@@ -5,9 +5,9 @@ public class Tabuleiro implements Cloneable
 
     public boolean haMarcaNaPosicao (int lin, int col) throws Exception
     {
-        if(lin < 0 || lin >= matriz.length)
+        if(lin < 0 || lin >= this.matriz.length)
             throw new Exception("Linha inválida, excede as rows da matriz");
-        if(col < 0 || col >= matriz[0].length)
+        if(col < 0 || col >= this.matriz[0].length)
             throw new Exception("Coluna inválida, excede as colunas da matriz");
         
         if(matriz[lin][col].equals('O') || matriz[lin][col].equals('X'))
@@ -19,14 +19,14 @@ public class Tabuleiro implements Cloneable
         // parametros forem invalidos
     }
     public Tabuleiro() {
-        matriz = new Marca [3][3];
+        matriz = new Marca[3][3];
     }
 
     public Marca getMarcaNaPosicao (int lin, int col) throws Exception
     {
-        if(lin < 0 || lin >= matriz.length)
+        if(lin < 0 || lin >= this.matriz.length)
             throw new Exception("Linha inválida, excede as rows da matriz");
-        if(col < 0 || col >= matriz[0].length)
+        if(col < 0 || col >= this.matriz[0].length)
             throw new Exception("Coluna inválida, excede as colunas da matriz");
         
         
@@ -64,8 +64,8 @@ public class Tabuleiro implements Cloneable
             return false;
         
         Tabuleiro outro = (Tabuleiro) obj;
-        for(int i=0; i < matriz.length; i++)
-            for(int j = 0; j < matriz[0].length; i++)
+        for(int i=0; i < this.matriz.length; i++)
+            for(int j = 0; j < this.matriz[0].length; i++)
                 if(this.matriz[i][j] != outro.matriz[i][j])
                     return false;
         
@@ -78,9 +78,9 @@ public class Tabuleiro implements Cloneable
     public String toString ()
     {
         String str = "";
-        for(int i=0; i < matriz.length; i++) {
+        for(int i=0; i < this.matriz.length; i++) {
             str += i + " | " ;
-            for(int j = 0; j < matriz[0].length; i++) {
+            for(int j = 0; j < this.matriz[0].length; i++) {
                 str += "_\n" + matriz[i][j].getSimbolo();
             }
         }
@@ -93,8 +93,8 @@ public class Tabuleiro implements Cloneable
     public int hashCode ()
     {
         int resul = super.hashCode();
-        for(int i=0; i < matriz.length; i++)
-            for(int j = 0; j < matriz[0].length; i++)
+        for(int i=0; i < this.matriz.length; i++)
+            for(int j = 0; j < this.matriz[0].length; i++)
                 resul = resul * 7 + matriz[i][j].hashCode();
         
         return resul;
@@ -105,11 +105,10 @@ public class Tabuleiro implements Cloneable
     {
         if(t == null)
             throw new Exception("Objeto nulo, não há o que copiar");
+        this.matriz = new Marca[3][3];
         
-        this.matriz = new Marca[t.matriz.length][t.matriz[0].length];
-        
-        for(int i=0; i < matriz.length; i++)
-            for(int j = 0; j < matriz[0].length; i++)
+        for(int i = 0; i < this.matriz.length; i++)
+            for(int j = 0; j < this.matriz[0].length; j++)
                 this.matriz[i][j] = t.matriz[i][j];
         // construtor de copia
     }

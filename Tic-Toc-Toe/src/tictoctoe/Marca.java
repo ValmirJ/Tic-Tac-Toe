@@ -6,7 +6,8 @@ public class Marca
     public Marca (char smb) throws Exception
     {
         smb = Character.toUpperCase(smb);
-        if(smb != 'X' || smb != 'O')
+        
+        if(smb != 'X' && smb != 'O')
             throw new Exception("Marca inválida");
         
         this.simbolo = smb;
