@@ -8,7 +8,7 @@ public class AnalistaSituacional implements Cloneable
         if(tab == null)
             throw new Exception("Tabuleiro nulo");
         
-        tabDoJogo = new Tabuleiro(tab);
+        tabDoJogo = tab;
         // inicia tabDoJogo com tab; lanca excecao caso tab seja nulo
     }
 
@@ -32,7 +32,7 @@ public class AnalistaSituacional implements Cloneable
         return null;
     }
 
-    protected boolean tabuleiroCheio ()
+    protected boolean tabuleiroCheio()
     {
         for(int i = 0; i < this.tabDoJogo.matriz.length; i++)
             for(int j = 0; j < this.tabDoJogo.matriz[0].length; j++)
@@ -52,7 +52,14 @@ public class AnalistaSituacional implements Cloneable
     }
 
     protected boolean verificaSeHaVencedor(Marca a1, Marca a2, Marca a3) {
-        return (a1.equals(a2) && a2.equals(a3)) && a1 != null;
+        if(a1 == null)
+            return false;
+        if(a2 == null)
+            return false;
+        if(a3 == null)
+            return false;
+     
+        return (a1.equals(a2) && a2.equals(a3));
     }
     public boolean fimDeJogo ()
     {

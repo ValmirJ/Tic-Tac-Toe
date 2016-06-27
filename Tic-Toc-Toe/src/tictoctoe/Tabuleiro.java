@@ -3,14 +3,14 @@ public class Tabuleiro implements Cloneable
 {
     protected Marca[][] matriz; 
 
-    public boolean haMarcaNaPosicao (int lin, int col) throws Exception
+    public boolean haMarcaNaPosicao(int lin, int col) throws Exception
     {
         if(lin < 0 || lin >= this.matriz.length)
             throw new Exception("Linha inválida, excede as rows da matriz");
         if(col < 0 || col >= this.matriz[0].length)
             throw new Exception("Coluna inválida, excede as colunas da matriz");
         
-        if(matriz[lin][col].equals('O') || matriz[lin][col].equals('X'))
+        if(matriz[lin][col] != null)
             return true;
         
         return false;
@@ -78,10 +78,13 @@ public class Tabuleiro implements Cloneable
     public String toString ()
     {
         String str = "";
-        for(int i=0; i < this.matriz.length; i++) {
-            str += i + " | " ;
-            for(int j = 0; j < this.matriz[0].length; i++) {
-                str += "_\n" + matriz[i][j].getSimbolo();
+        for(int i = 0; i < this.matriz.length; i++) {
+            str += "\n" + i + "|" ;
+            for(int j = 0; j < this.matriz[0].length; j++) {
+                if(matriz[i][j] != null)
+                    str += matriz[i][j].getSimbolo() + "|";
+                else 
+                    str += " |";
             }
         }
         

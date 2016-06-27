@@ -14,12 +14,12 @@ public class JogadorHumano implements Cloneable
         if (tab == null)
             throw new Exception("Tabuleiro nulo");
         
-        this.tabDoJogo = new Tabuleiro(tab);
+        this.tabDoJogo = tab;
         
         System.out.println("Digite sua marca: ");
         for(;;) {
             try {
-                this.marca = new Marca((char)entrada.read());
+                this.marca = new Marca(entrada.readLine().charAt(0));
                 break;
             }
             catch(Exception e) {
@@ -37,7 +37,7 @@ public class JogadorHumano implements Cloneable
         if(mrc == null)
             throw new Exception("Marca nula");
         
-        tabDoJogo = new Tabuleiro(tab);
+        tabDoJogo = tab;
         marca = new Marca(mrc.getSimbolo());
         // inicia tabDoJogo com tab e marca com mrc; lanca excecao caso tab ou mrc sejam nulos
     }
@@ -53,7 +53,7 @@ public class JogadorHumano implements Cloneable
         int lin, col;
         for(;;) {
             try {
-                System.out.println(this.tabDoJogo.matriz.toString());
+                System.out.println(this.tabDoJogo.toString());
                 System.out.print("\nDigite uma posição X: ");
                 lin = Integer.parseInt(entrada.readLine());
                 System.out.print("\nDigite uma posição Y: ");
@@ -91,11 +91,12 @@ public class JogadorHumano implements Cloneable
     {
         char opt = 'i';
         do {
-            System.out.print("\nDeseja jogar novamente? (S) ou (N)\n");
+            System.out.println("\nDeseja jogar novamente? (S) ou (N)");
             try {
-                opt = (char)entrada.read();
+                opt = Character.toUpperCase(entrada.readLine().charAt(0));
             } catch (Exception e) {}
-        } while (opt != 'S' || opt != 'N');
+        } while (opt != 'S' && opt != 'N');
+        
         return opt == 'S';
         // pergunta, quantas vezes forem necessarias, se o jogador deseja jogar
         // mais uma partida (ate que o mesmo forneca uma resposta valida), retornando

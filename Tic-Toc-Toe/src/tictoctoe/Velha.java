@@ -1,5 +1,7 @@
 package tictoctoe;
+import com.sun.istack.internal.logging.Logger;
 import java.io.IOException;
+import java.util.logging.Level;
 
 public class Velha
 {
@@ -61,9 +63,8 @@ public class Velha
 
                 jogadorHumanoComeca = !jogadorHumanoComeca;
             }
-            catch (Exception e)
-            {
-               System.err.print(e);
+            catch(Exception e){
+                Logger.getLogger(Velha.class.getClass()).log(Level.SEVERE, null, e);
             }
         }
         while (jogadorH.querMaisUmaPartida()); 

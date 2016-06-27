@@ -14,7 +14,7 @@ public class JogadorAutomatico implements Cloneable
            throw new Exception("Tabuleiro nulo");
         
         this.gerador = new Random();
-        this.tabDoJogo = new Tabuleiro(tab);
+        this.tabDoJogo = tab;
         this.marca = new Marca(gerador.nextBoolean()?'X':'O');
         // inicia tabDoJogo com tab e sorteia uma marca (X ou O) para o jogador,
         // iniciando marca; lanca excecao caso tab seja nulo
@@ -29,7 +29,7 @@ public class JogadorAutomatico implements Cloneable
             throw new Exception("Marca nula");
         this.gerador = new Random();
         
-        this.tabDoJogo = new Tabuleiro(tab);
+        this.tabDoJogo = tab;
         this.marca = mrc;
         // inicia tabDoJogo com tab e marca com mrc; lanca excecao caso tab ou mrc sejam nulos
     }
@@ -44,13 +44,15 @@ public class JogadorAutomatico implements Cloneable
     {
         int l, c;
         for(;;) {
-            l = gerador.nextInt(2);
-            c = gerador.nextInt(2);
+            l = gerador.nextInt(3);
+            c = gerador.nextInt(3);
             try {
                 this.tabDoJogo.haMarcaNaPosicao(l, c);
                 this.tabDoJogo.setMarcaNaPosicao(this.marca, l, c);
                 break;
-            } catch(Exception e) {}
+            } catch(Exception e) {
+                System.out.println("testando");
+            }
         }
         // faz o jogador fazer uma jogada INTELIGENTE
     }
